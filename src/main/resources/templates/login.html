@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  layout:decorator="layout">
+<head>
+	<title>Log in</title>
+
+	<link rel="shortcut icon" href="@{assets/images/gt_favicon.png}">
+
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}">
+	<link rel="stylesheet"th:href="@{assets/css/font-awesome.min.css}">
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" th:href="@{assets/css/bootstrap-theme.css}" media="screen" >
+	<link rel="stylesheet" th:href="@{assets/css/main.css}">
+	<style>
+		.btn-default, .btn-primary, .btn-success, .btn-action
+		.btn-info,    .btn-warning, .btn-danger {
+			text-shadow: 0 2px 1px rgba(0, 0, 0, .2);
+		}
+
+		.btn { padding: 10px 40px; font-weight: bold; border:0 none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+		.btn-lg { padding: 15px 65px; font-size: 14px; font-weight:bold; }
+		.btn-default { text-shadow: none; background:transparent; color:rgba(50,50,50,.5); -webkit-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); -moz-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.5); }
+		.btn-default:hover,
+		.btn-default:focus { color:rgba(50,50,50,.8); -webkit-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.8); -moz-box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.8); box-shadow:inset 0px 0px 0px 3px rgba(50,50,50,.8); background: transparent; }
+		.btn-default:active,
+		.btn-default.active { color:#333; -webkit-box-shadow:inset 0px 0px 0px 3px #333; -moz-box-shadow:inset 0px 0px 0px 3px #333; box-shadow:inset 0px 0px 0px 3px #333; background: transparent; }
+
+		.btn-action,
+		.btn-primary { color:#FFEFD7; background-image: -webkit-linear-gradient(top, #FF9B22 0%, #FF8C00 100%); background-image: linear-gradient(to bottom, #FF9B22 0%, #FF8C00 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffFF9B22', endColorstr='#ffFF8C00', GradientType=0); filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); background-repeat: repeat-x; border:0 none; }
+		.btn-action:hover,
+		.btn-action:focus { color:#fff; background: #FF9B22; }
+		.btn-action:active {	background: #FF8C00; }
+
+	</style>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="index.html">Home</a></li>
+			<li class="active">User access</li>
+		</ol>
+
+		<div class="row">
+
+			<!-- Article main content -->
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Sign in</h1>
+				</header>
+
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Sign in to your account</h3>
+							<p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signup.html">Register</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+							<hr>
+
+							<form action="home" th:action="@{/login}" method="post">
+								<div class="top-margin">
+									<label>Username/Email <span class="text-danger">*</span></label>
+									<input type="email" class="form-control" name="username"
+										   placeholder="Email" /> <span
+										class="glyphicon glyphicon-envelope form-control-feedback"></span>
+								</div>
+
+								<div class="top-margin">
+									<label>Password <span class="text-danger">*</span></label>
+									<input type="password" class="form-control" name="password"
+										   placeholder="Password" /> <span
+										class="glyphicon glyphicon-lock form-control-feedback"></span>
+								</div>
+
+								<hr>
+
+								<div class="row">
+									<div class="col-lg-8">
+										<b><a href="">Forgot password?</a></b>
+									</div>
+									<div class="col-lg-4 text-right">
+										<button class="btn btn-action" type="submit" >Sign in</button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div th:if="${param.error}"
+											 class="alert alert-danger alert-dismissable">
+											<p>
+												<i class="icon fa fa-ban"></i> <span
+													th:text="#{error.login_failed}">Invalid Email and
+													Password.</span>
+											</p>
+										</div>
+										<div th:if="${param.logout}"
+											 class="alert alert-info alert-dismissable">
+											<p>
+												<i class="icon fa fa-info"></i> <span
+													th:text="#{info.logout_success}">You have been logged
+													out.</span>
+											</p>
+										</div>
+										<div th:if="${msg!=null}"
+											 class="alert alert-warning alert-dismissable">
+											<p>
+												<i class="icon fa fa-warning"></i> <span th:text="${msg}"></span>
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+			</article>
+			<!-- /Article -->
+
+		</div>
+	</div>	<!-- /container -->
+
+</div>
+</body>
+</html>
